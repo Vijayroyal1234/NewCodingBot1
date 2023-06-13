@@ -2,27 +2,23 @@ package testCases;
 
 import org.testng.annotations.Test;
 
+import pages.BasePage;
 import pages.CommonMethods;
 import pages.HomePage;
 import pages.SearchResultsPage;
 
-public class BookFlights extends CommonMethods {
+public class BookFlights extends BasePage {
 	
 	
 	@Test
 	public void bookFlightWithLowestPrice() {
 	
-		launchBrowser();
-		
-		HomePage homePage = new HomePage(driver);
-		SearchResultsPage resultsPage = new SearchResultsPage(driver);
-		
-		
-		homePage.validateHeader();
-		homePage.verifyDestinationLink();
-		homePage.findFlights("Mexico City", "London");
-		resultsPage.verifyFlightResultsPage("Mexico City", "London");
-		resultsPage.selectFlightWithLowestPrice();
+
+		getHomePage().validateHeader();
+		getHomePage().verifyDestinationLink();
+		getHomePage().findFlights("Mexico City", "London");
+		getSearchResultsPage().verifyFlightResultsPage("Mexico City", "London");
+		getSearchResultsPage().selectFlightWithLowestPrice();
 		
 		
 	}
@@ -30,17 +26,12 @@ public class BookFlights extends CommonMethods {
 	@Test
 	public void bookFlightWithHighestPrice() {
 	
-		launchBrowser();
 		
-		HomePage homePage = new HomePage(driver);
-		SearchResultsPage resultsPage = new SearchResultsPage(driver);
-		
-		
-		homePage.validateHeader();
-		homePage.verifyDestinationLink();
-		homePage.findFlights("Mexico City", "London");
-		resultsPage.verifyFlightResultsPage("Mexico City", "London");
-		resultsPage.selectFlightWithHigestPrice();
+		getHomePage().validateHeader();
+		getHomePage().verifyDestinationLink();
+		getHomePage().findFlights("Mexico City", "London");
+		getSearchResultsPage().verifyFlightResultsPage("Mexico City", "London");
+		getSearchResultsPage().selectFlightWithHigestPrice();
 		
 		
 		

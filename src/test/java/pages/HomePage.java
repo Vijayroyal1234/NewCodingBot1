@@ -2,9 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
 import frameworkUtils.EventUtils;
 
 public class HomePage extends EventUtils{
@@ -19,7 +16,7 @@ public class HomePage extends EventUtils{
 	public void validateHeader() {
 		String expHeaderVal = "Welcome to the Simple Travel Agency!";
 		
-		String actHeaderVal =  driver.findElement(By.tagName("h1")).getText();
+		String actHeaderVal =   waitForElement(By.tagName("h1")).getText();
 		
 		if (actHeaderVal.equalsIgnoreCase(expHeaderVal)) {
 			System.out.println("Header value displayed same as exepected. Expected is : " + expHeaderVal);
@@ -30,7 +27,7 @@ public class HomePage extends EventUtils{
 	}
 	
 	public void verifyDestinationLink() {
-		driver.findElement(By.linkText("destination of the week! The Beach!")).click();
+		waitForElementClickable(By.linkText("destination of the week! The Beach!")).click();
 		
 		String curURL = driver.getCurrentUrl();
 		
@@ -57,8 +54,8 @@ public class HomePage extends EventUtils{
 		
 		selectValueFromList(driver.findElement(By.name("fromPort")), from);
 		selectValueFromList(driver.findElement(By.name("toPort")), to);
-		
-		driver.findElement(By.xpath("//input[@value='Find Flights']")).click();
+	
+		waitForElementClickable(driver.findElement(By.xpath("//input[@value='Find Flights']"))).click();
 		
 		
 	}
