@@ -7,7 +7,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class SearchResultsPage {
+import frameworkUtils.EventUtils;
+
+public class SearchResultsPage extends EventUtils{
 	private WebDriver driver;
 	
 	public SearchResultsPage(WebDriver driver) {
@@ -16,7 +18,8 @@ public class SearchResultsPage {
 	
 	public void verifyFlightResultsPage(String from, String to) {
 		String expHeader = "Flights from "+from+" to "+to+":";
-		String actHeader = driver.findElement(By.tagName("h3")).getText();
+		String actHeader = waitForElement(By.tagName("h3")).getText();
+		
 		
 		if (actHeader.equalsIgnoreCase(expHeader)) {
 			System.out.println("Flight results displayed between two seleected cities");
@@ -31,7 +34,7 @@ public class SearchResultsPage {
 		try {
 		
 			String xpath =  "//td[text()='"+airlineName+"']/preceding-sibling::td/input";
-			driver.findElement(By.xpath(xpath)).click();
+			waitForElementClickable(driver.findElement(By.xpath(xpath))).click();
 			
 		} catch(NoSuchElementException e) {
 			System.out.println("given airline :" + airlineName+ " is not available in the results.");
